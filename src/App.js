@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+Copyimport React, { useState, useEffect } from 'react';
 
 const Navigation = ({ setCurrentPage }) => (
   <nav className="flex justify-center space-x-6 mb-8">
@@ -88,39 +88,28 @@ const Home = () => (
 
 // Blog Page
 const Blog = () => {
-  const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
-
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        // Read the posts.json file
-        const response = await window.fs.readFile('posts.json', { encoding: 'utf8' });
-        const postsData = JSON.parse(response);
-        setPosts(postsData);
-      } catch (error) {
-        console.error('Error loading blog posts:', error);
-      }
-    };
-
-    loadPosts();
-  }, []);
-
-  const handlePostClick = async (postId) => {
-    if (selectedPost === postId) {
-      setSelectedPost(null);
-      return;
+  
+  // Sample blog posts
+  const posts = [
+    {
+      id: 1,
+      title: "Starting My Blog",
+      date: "2024-12-28",
+      summary: "First post about trading tools",
+      content: "This is where I'll be sharing my thoughts and experiences about trading tools and working with Claude."
+    },
+    {
+      id: 2,
+      title: "Building with Claude",
+      date: "2024-12-27",
+      summary: "Exploring what we can create with AI assistance",
+      content: "Today I want to talk about the different ways we can use Claude to help build and analyze trading tools..."
     }
+  ];
 
-    try {
-      // Read the individual post content
-      const response = await window.fs.readFile(`posts/${postId}.md`, { encoding: 'utf8' });
-      const post = posts.find(p => p.id === postId);
-      post.content = response;
-      setSelectedPost(postId);
-    } catch (error) {
-      console.error('Error loading post content:', error);
-    }
+  const handlePostClick = (postId) => {
+    setSelectedPost(selectedPost === postId ? null : postId);
   };
 
   return (
