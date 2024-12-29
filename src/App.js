@@ -1,49 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-// Navigation Component
 const Navigation = ({ setCurrentPage }) => (
-  <nav className="mb-8">
-    <ul className="flex space-x-6">
-      <li>
-        <button 
-          onClick={() => setCurrentPage('home')} 
-          className="text-green-400 hover:text-green-300 text-sm"
-        >
-          home
-        </button>
-      </li>
-      <li>
-        <button 
-          onClick={() => setCurrentPage('blog')} 
-          className="text-green-400 hover:text-green-300 text-sm"
-        >
-          blog
-        </button>
-      </li>
-      <li>
-        <button 
-          onClick={() => setCurrentPage('contact')} 
-          className="text-green-400 hover:text-green-300 text-sm"
-        >
-          contact
-        </button>
-      </li>
-    </ul>
+  <nav className="flex justify-center space-x-6 mb-8">
+    <button 
+      onClick={() => setCurrentPage('home')} 
+      className="text-green-400 hover:text-green-300 text-sm no-underline"
+    >
+      home
+    </button>
+    <button 
+      onClick={() => setCurrentPage('blog')} 
+      className="text-green-400 hover:text-green-300 text-sm no-underline"
+    >
+      blog
+    </button>
+    <button 
+      onClick={() => setCurrentPage('contact')} 
+      className="text-green-400 hover:text-green-300 text-sm no-underline"
+    >
+      contact
+    </button>
   </nav>
-);
-
-// Footer Component
-const Footer = () => (
-  <footer className="mt-16 pt-8 border-t border-gray-700">
-    <p className="text-sm text-gray-400">
-      © {new Date().getFullYear()} vengy.
-    </p>
-  </footer>
 );
 
 // Home Page
 const Home = () => (
-  <main>
+  <main className="max-w-2xl mx-auto">
     <h1 className="text-2xl font-bold mb-4 text-white">
       hello, it's vengy.
     </h1>
@@ -60,7 +42,7 @@ const Home = () => (
       <p className="mb-4 text-gray-300">
         most of my projects are on{' '}
         <a 
-          href="https://github.com/nickvengy" 
+          href="https://github.com/[your-username]" 
           className="text-green-400 hover:text-green-300"
           target="_blank"
           rel="noopener noreferrer"
@@ -212,11 +194,15 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-black text-white px-4 py-8">
+      <div className="max-w-2xl mx-auto">
         <Navigation setCurrentPage={setCurrentPage} />
         {renderPage()}
-        <Footer />
+        <footer className="mt-16 pt-8 border-t border-gray-700">
+          <p className="text-sm text-gray-400">
+            © {new Date().getFullYear()} vengy.
+          </p>
+        </footer>
       </div>
     </div>
   );
